@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_bin
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['MYSQL_USER'] || 'batch_user' %>
+  password: <%= ENV['MYSQL_PASSWORD'] || 'batch' %>
+  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
+
+development:
+  <<: *default
+  database: batch_dev
+
+test:
+  <<: *default
+  database: batch_test
+
+production:
+  <<: *default
+  database: batch
+  username: rails_batch_sample
+  password: <%= ENV['RAILS_BATCH_SAMPLE_DATABASE_PASSWORD'] %>
